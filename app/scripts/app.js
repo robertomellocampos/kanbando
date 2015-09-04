@@ -14,26 +14,30 @@ angular
     'ngCookies',
     'ngResource',
     'ngRoute',
+    'ui.router',
     'ngSanitize',
     'ngTouch'
   ])
-  .config(function ($routeProvider, $locationProvider) {
-    $locationProvider.html5Mode(true);
+  .config(function($stateProvider, $urlRouterProvider) {
+  //
+  // For any unmatched url, redirect to /state1
+  $urlRouterProvider.otherwise("/home");
+  //
+  // Now set up the states
+  $stateProvider
+    .state('home', {
+      url: "/",
+      templateUrl: "views/main.html",
+      controller: 'MainCtrl'
+    }).state('about', {
+      url: "/about",
+      templateUrl: "views/about.html",
+      controller: 'AboutCtrl'
+    })
+    .state('contact', {
+      url: "/contact",
+      templateUrl: "views/contact.html",
+      controller: 'MainCtrl'
+    });
+});
 
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/contact', {
-        templateUrl: 'views/contact.html',
-        controller: 'ContactCtrl'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
