@@ -16,12 +16,14 @@ angular
     'ngRoute',
     'ui.router',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch', 
+    'facebook'
   ])
-  .config(function($stateProvider, $urlRouterProvider) {
+  .config(function($stateProvider, $urlRouterProvider, FacebookProvider) {
   //
+  FacebookProvider.init('892960984123213');
   // For any unmatched url, redirect to /state1
-  $urlRouterProvider.otherwise("/home");
+  $urlRouterProvider.otherwise("/");
   //
   // Now set up the states
   $stateProvider
