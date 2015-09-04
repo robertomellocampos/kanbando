@@ -11,11 +11,29 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
+    
+<script>
+    ACCESS_TOKEN = 'pk.eyJ1IjoibWFwYm94IiwiYSI6IjZjNmRjNzk3ZmE2MTcwOTEwMGY0MzU3YjUzOWFmNWZhIn0.Y8bhBaUMqFiPrDRW9hieoQ';
+    CM_ATTR = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+      '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+      'Imagery © <a href="http://cloudmade.com">CloudMade</a>';
+    CM_URL = 'http://{s}.tile.cloudmade.com/d4fc77ea4a63471cab2423e66626cbb6/{styleId}/256/{z}/{x}/{y}.png';
+    MB_ATTR = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+      '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+      'Imagery © <a href="http://mapbox.com">Mapbox</a>';
+    MB_URL = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=' + ACCESS_TOKEN;
+    OSM_URL = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    OSM_ATTRIB = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+  </script>
+    <link rel="stylesheet" href="lib/leaflet-0.7.5/leaflet.css" />
     <link rel="stylesheet" href="styles/main.css">
+
+    <script src="lib/leaflet-0.7.5/leaflet.js"></script>
     <!-- endbuild -->
   </head>
   <body ng-app="myPeopleAppApp">
-    <!--[if lt IE 7]>
+  
+     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
@@ -23,19 +41,23 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="/">Home</a></li>
+          <li class="active"><a href="/">Home</a></li>
           <li><a ng-href="/about">About</a></li>
           <li><a ng-href="/contact">Contact</a></li>
         </ul>
         <h3 class="text-muted">myPeopleApp</h3>
       </div>
-
+      <div id="map">
       <div ng-view=""></div>
-
+      </div>
       <div class="footer">
         <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
       </div>
+        
     </div>
+
+
+   
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -47,6 +69,16 @@
 
        ga('create', 'UA-XXXXX-X');
        ga('send', 'pageview');
+
+       var map = L.map('map').setView([51.505, -0.09], 13);
+
+       L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+L.marker([51.5, -0.09]).addTo(map)
+    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+    .openPopup();
     </script>
 
     <!-- build:js(.) scripts/oldieshim.js -->
@@ -88,3 +120,7 @@
         <!-- endbuild -->
 </body>
 </html>
+
+
+
+
