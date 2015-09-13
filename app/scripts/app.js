@@ -29,8 +29,8 @@ angular
   $stateProvider
     .state('home', {
       url: "/",
-      templateUrl: "views/main.html",
-      controller: 'MainCtrl'
+      templateUrl: "views/home.html",
+      controller: 'HomeCtrl'
     }).state('about', {
       url: "/about",
       templateUrl: "views/about.html",
@@ -39,7 +39,7 @@ angular
     .state('contact', {
       url: "/contact",
       templateUrl: "views/contact.html",
-      controller: 'MainCtrl'
+      controller: 'ContactCtrl'
     });
 });
 
