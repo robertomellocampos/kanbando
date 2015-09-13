@@ -23,22 +23,22 @@ angular
   //
   FacebookProvider.init('892960984123213');
   // For any unmatched url, redirect to /state1
-  $urlRouterProvider.otherwise("/");
+  $urlRouterProvider.otherwise('/');
   //
   // Now set up the states
   $stateProvider
     .state('home', {
-      url: "/",
-      templateUrl: "views/home.html",
+      url: '/',
+      templateUrl: 'views/home.html',
       controller: 'HomeCtrl'
     }).state('about', {
-      url: "/about",
-      templateUrl: "views/about.html",
+      url: '/about',
+      templateUrl: 'views/about.html',
       controller: 'AboutCtrl'
     })
     .state('contact', {
-      url: "/contact",
-      templateUrl: "views/contact.html",
+      url: '/contact',
+      templateUrl: 'views/contact.html',
       controller: 'ContactCtrl'
     });
 });

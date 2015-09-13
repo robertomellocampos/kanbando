@@ -8,7 +8,13 @@
  * Controller of the myPeopleAppApp
  */
 angular.module('myPeopleAppApp')
-    .controller('IndexCtrl', function($scope, Facebook) {
+    .controller('IndexCtrl', function($scope, Facebook, mapService) {
+        mapService.init();
+
+        $scope.searchWorkers = function(){console.log($scope.searchField);
+            mapService.setMarkers($scope.searchField);    
+        };
+
 
         $scope.login = function() {
             // From now on you can use the Facebook service just as Facebook api says
@@ -25,7 +31,7 @@ angular.module('myPeopleAppApp')
         $scope.$watch(function() {
             // This is for convenience, to notify if Facebook is loaded and ready to go.
             return Facebook.isReady();
-        }, function(newVal) {
+        }, function() {
             window.Face = Facebook;
             $scope.facebookReady = true;
         });
@@ -42,7 +48,7 @@ angular.module('myPeopleAppApp')
 
         $scope.me = function() {
             Facebook.api('/me', function(response) {
-                console.log(response)
+
                 $scope.user = response;
             });
         };
