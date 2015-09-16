@@ -8,11 +8,53 @@
  * Controller of the myPeopleAppApp
  */
 angular.module('myPeopleAppApp')
-    .controller('IndexCtrl', function($scope, Facebook, mapService) {
-        mapService.init();
+    .controller('IndexCtrl', function($scope, Facebook, mapService, workerService, $compile) {
 
-        $scope.searchWorkers = function(){console.log($scope.searchField);
-            mapService.setMarkers($scope.searchField);    
+        var map;
+        var init = function() {
+            map = L.map('map', {
+                'zoomControl': false
+            }).setView([-22.910419, -43.178812], 13);
+
+            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            map.addControl(L.control.zoom({
+                position: 'bottomright'
+            }));
+        };
+
+        var focus = function(marker) {
+            map.setView([marker.latitude, marker.longitude], 13);
+        };
+
+        init();
+
+        var setMarkers = function(job) {
+
+            var workers = _.where(workerService.workers(), {job: job});
+            angular.forEach(workers, function(worker, index) {
+                
+                $scope.rate = 7;
+                $scope.max = 7;  
+                $scope.name = worker.name;
+                $scope.job = worker.job;
+                var templatePopupRating = '<div id="teste"><h5>{{name}}</h5><h6>{{job}}</h6>' +
+                    '<rating ng-model="rate" max="max"></rating></div>';
+                
+
+                var compiled = $compile(templatePopupRating)($scope)[0];
+                
+                L.marker([worker.latitude, worker.longitude]).addTo(map)
+                    .bindPopup(compiled);
+
+                map.setView([worker.latitude, worker.longitude], 13);
+            });
+        };
+
+        $scope.searchWorkers = function(){
+            setMarkers($scope.searchField);    
         };
 
 

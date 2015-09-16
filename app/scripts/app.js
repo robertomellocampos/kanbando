@@ -10,14 +10,13 @@
  */
 angular
   .module('myPeopleAppApp', [
-    'ngAnimate',
     'ngCookies',
     'ngResource',
-    'ngRoute',
     'ui.router',
     'ngSanitize',
     'ngTouch', 
-    'facebook'
+    'facebook',
+    'ui.bootstrap'
   ])
   .config(function($stateProvider, $urlRouterProvider, FacebookProvider) {
   //

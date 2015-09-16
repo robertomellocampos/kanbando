@@ -31,11 +31,15 @@ angular.module('myPeopleAppApp')
         this.setMarkers = function(name) {
 
             var workers = _.where(workerService.workers(), {name: name});
-console.log(workers);
             angular.forEach(workers, function(worker, index) {
                 console.log(worker);
+
+                var templatePopupRating = '<h4>Default</h4>' +
+                    '<rating ng-model="rate" ng-init="rate = 7, max = 10" max="max" readonly="isReadonly"></rating>';
                 L.marker([worker.latitude, worker.longitude]).addTo(map)
-                    .bindPopup(worker.name);
+                    .bindPopup('<div id="teste" ng-controller="RatingCtrl">' + worker.name +
+                    templatePopupRating +
+                        '</div>');
 
                 map.setView([worker.latitude, worker.longitude], 13);
             });
