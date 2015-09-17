@@ -26,6 +26,13 @@ angular.module('myPeopleAppApp')
                 job: 'Costureira',
                 latitude: -22.966830,
                 longitude: -43.182494,
-            }];
+            },
+            {
+                name: 'Daniel',
+                job: 'Marceneiro',
+                latitude: -22.902343,
+                longitude: -43.177389,
+            }
+            ];
         }
     });

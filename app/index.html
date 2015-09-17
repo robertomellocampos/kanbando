@@ -13,7 +13,8 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <style type="text/css">
-    #wrapper, #mainContainer {
+    #wrapper,
+    #mainContainer {
         position: absolute;
         width: 100%;
         height: 100%
@@ -36,7 +37,7 @@
         <nav class="navbar navbar-default no-margin" style="z-index: 1">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header fixed-brand">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" id="menu-toggle">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse">
                     <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
                 </button>
                 <a class="navbar-brand" href="#"><i class="fa fa-rocket fa-4"></i> BOA ESCOLHA</a>
@@ -45,7 +46,8 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></button>
+                        <button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> 
+                        <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></button>
                     </li>
                 </ul>
                 <div class="container-search">
@@ -57,7 +59,7 @@
             <!-- bs-example-navbar-collapse-1 -->
         </nav>
         <div id="map" style="position: relative">
-            <div id="wrapper">
+            <div id="wrapper" class="toggled-2">
                 <!-- Sidebar -->
                 <div id="sidebar-wrapper">
                     <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
@@ -136,6 +138,7 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/directives/ngEnter.js"></script>
+        <script src="scripts/directives/ngMarkerTemplate.js"></script>
         <script src="scripts/controllers/home.js"></script>
         <script src="scripts/controllers/index.js"></script>
         <script src="scripts/controllers/about.js"></script>
@@ -144,10 +147,7 @@
         <script src="scripts/services/mapService.js"></script>
         <script src="scripts/services/workerService.js"></script>
         <script type="text/javascript">
-        $("#menu-toggle").click(function(e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
+        
         $("#menu-toggle-2").click(function(e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled-2");
@@ -157,7 +157,6 @@
         function initMenu() {
             $('#menu ul').hide();
             $('#menu ul').children('.current').parent().show();
-            //$('#menu ul:first').show();
             $('#menu li a').click(
                 function() {
                     var checkElement = $(this).next();
